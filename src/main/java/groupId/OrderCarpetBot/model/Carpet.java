@@ -16,7 +16,7 @@ public class Carpet {
 
     private String size;
 
-    private Double price;
+    private int price;
 
     private String photo;
 
