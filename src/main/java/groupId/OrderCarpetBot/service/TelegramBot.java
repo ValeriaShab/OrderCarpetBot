@@ -6,10 +6,11 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import com.pengrad.telegrambot.request.SendPhoto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +26,15 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     public TelegramBot(BotConfig config){
        this.config = config;
-       List<BotCommand> listofCommands = new ArrayList<>();
-       listofCommands.add(new BotCommand("/start", "start work with bot"));
-       listofCommands.add(new BotCommand("/aboutus", "see information about owner"));
-       listofCommands.add(new BotCommand("/checkprice", "check  approximate price"));
-       listofCommands.add(new BotCommand("/choosecarpet", "choose carpet from one of proposed"));
-       listofCommands.add(new BotCommand("/createcarpet", "create your own carpet"));
-       listofCommands.add(new BotCommand("/contactme", "ask owner to contact you"));
+       List<BotCommand> listOfCommands = new ArrayList<>();
+       listOfCommands.add(new BotCommand("/start", "start work with bot"));
+       listOfCommands.add(new BotCommand("/aboutus", "see information about owner"));
+       listOfCommands.add(new BotCommand("/checkprice", "check  approximate price"));
+       listOfCommands.add(new BotCommand("/choosecarpet", "choose carpet from one of proposed"));
+       listOfCommands.add(new BotCommand("/createcarpet", "create your own carpet"));
+       listOfCommands.add(new BotCommand("/contactme", "ask owner to contact you"));
        try {
-           this.execute(new SetMyCommands(listofCommands, new BotCommandScopeDefault(), null));
+           this.execute(new SetMyCommands(listOfCommands, new BotCommandScopeDefault(), null));
        } catch (TelegramApiException e) {
            log.error("Error setting bot's command list: " + e.getMessage());
        }
@@ -51,6 +52,12 @@ public class TelegramBot extends TelegramLongPollingBot {
                case "/aboutus":
                prepareAndSendMessage(chatId, ABOUTUS_TEXT);
                break;
+               case "/choosecarpet":
+                   ChooseCarpetService.getInstance().getCarpets().stream()
+                           .map(carpet -> new SendPhoto(chatId, carpet.getPhoto())
+                                   .caption(String.format("Назва: %s, Розмір: %s, Ціна: %d",
+                                           carpet.getName(), carpet.getSize(), carpet.getPrice())));
+                   break;
                 default:
                sendMessage(chatId, "Ця команда наразі недоступна");
            }
