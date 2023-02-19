@@ -1,0 +1,32 @@
+{
+  "carpets": [
+    {
+      "id": "1",
+      "name": "Килим з руною Берсерк",
+      "size": "50*35 см",
+      "price": "800",
+      "photo": "file:///C:/Users/%D0%9B%D0%B5%D1%80%D0%B0/Desktop/Java/bot/berserk.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Килим <Stone Island>",
+      "size": "100*50 см",
+      "price": "1400",
+      "photo": "file:///C:/Users/%D0%9B%D0%B5%D1%80%D0%B0/Desktop/Java/bot/stone%20island.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Килим <Binance>",
+      "size": "100*50 см",
+      "price": "1200",
+      "photo": "file:///C:/Users/%D0%9B%D0%B5%D1%80%D0%B0/Desktop/Java/bot/binance.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Килим-диск <EMINEM>",
+      "size": "90*90 см",
+      "price": "1300",
+      "photo": "file:///C:/Users/%D0%9B%D0%B5%D1%80%D0%B0/Desktop/Java/bot/EMINEM%20cd.jpg"
+    }
+  ]
+}
